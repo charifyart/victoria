@@ -3,7 +3,6 @@ import { Client, DMChannel, GatewayIntentBits, Message, NewsChannel, PartialDMCh
 import { v4 } from 'uuid';
 require('dotenv').config()
 
-const token = "MTAyNzY5MjY0MTU5ODU5MDk3Ng.GNhP4F.EHU8Yw4FAbuaXumvN53cBzqsaOU-50LBl_cy2g"; // add your token here
 
 console.log("Bot is starting...");
 
@@ -24,7 +23,7 @@ const discordClient = new Client({
     partials: [Partials.Channel],
   });
 
-discordClient.login(token); 
+discordClient.login(process.env.DISCORD_BOT_TOKEN); 
 
 const run = async function () {
     discordClient.on('ready', () => {
@@ -46,6 +45,9 @@ const run = async function () {
   
     discordClient.login(process.env.DISCORD_BOT_TOKEN);
   };
+if (!process.env.DISCORD_BOT_TOKEN) {
+    throw new Error('INWORLD_KEY env variable is required');
+}
 if (!process.env.INWORLD_KEY) {
   throw new Error('INWORLD_KEY env variable is required');
 }
